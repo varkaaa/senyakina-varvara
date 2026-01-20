@@ -1,0 +1,60 @@
+import random
+
+#реализация быстрой сортировки
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    
+    pivot = arr[len(arr) // 2]  # выбираем средний элемент как опорный
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    
+    return quick_sort(left) + middle + quick_sort(right)
+
+print("=" * 50)
+numbers = [random.randint(-1000, 1000) for _ in range(1000)]
+print(f"Первые 10 чисел до сортировки: {numbers[:10]}")
+numbers = quick_sort(numbers)
+print(f"Первые 10 чисел после сортировки: {numbers[:10]}")
+
+print("=" * 50)
+
+arr = [random.randint(50, 100) for _ in range(20)]
+print(f"До сортировки: {arr}")
+arr = quick_sort(arr)
+print(f"После сортировки: {arr}")
+
+print("=" * 50)
+
+# Создаем двумерный массив 5x3
+matrix = [[random.randint(5, 61) for _ in range(3)] for _ in range(5)]
+print("До сортировки:")
+for row in matrix:
+    print(row)
+
+# Собираем первый столбец
+first_column = [row[0] for row in matrix]
+# Сортируем первый столбец
+sorted_first_column = quick_sort(first_column)
+
+# Создаем новую матрицу с отсортированным первым столбцом
+sorted_matrix = []
+for value in sorted_first_column:
+    for row in matrix:
+        if row[0] == value and row not in sorted_matrix:
+            sorted_matrix.append(row)
+            break
+
+print("\nПосле сортировки по первому столбцу:")
+for row in sorted_matrix:
+    print(row)
+
+print("=" * 50)
+
+students = ["Иванов", "Петров", "Сидоров", "Алексеев", "Яковлев", "Борисов"]
+print(f"До сортировки: {students}")
+students = quick_sort(students)
+print(f"После сортировки: {students}")
+
+print("=" * 50)
