@@ -1,0 +1,22 @@
+def main():
+    hash_table = {}  
+    
+    with open('input.txt', 'r') as f:
+        for line in f:
+            for num_str in line.split():
+                num = int(num_str)
+                if num == 0:
+                    # Преобразуем ключи хэш-таблицы в отсортированный список
+                    sorted_numbers = sorted(hash_table.keys())
+                    with open('output.txt', 'w') as out:
+                        out.write(' '.join(map(str, sorted_numbers)))
+                    return
+                elif num > 0:
+                    hash_table[num] = True  # Добавляем число
+                else:  
+                    positive_num = -num
+                    if positive_num in hash_table:
+                        del hash_table[positive_num]  # Удаляем число
+
+if __name__ == "__main__":
+    main()
